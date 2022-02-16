@@ -1,1 +1,2 @@
-# fun
+# Repository for building games...
+	...and other shenanigans
