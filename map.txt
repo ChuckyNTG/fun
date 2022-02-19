@@ -1,0 +1,3 @@
+// map representation of objects in the world
+// check how close a player is to objects, and then you can render them
+// multiple map objects, each map object covers 200 pixels in the world
