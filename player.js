@@ -1,18 +1,15 @@
 // create player
 
 
-const PLAYER_HEIGHT = 50;
-const PLAYER_WIDTH = 50;
+const PLAYER_HEIGHT = 25
+const PLAYER_WIDTH = 10;
 
 class Player {
 	constructor (x,y) {
 		this._position_x = x;
 		this._position_y = y;
-
-
-		window.addEventListener('keydown', function(e) {
-			playerAction(e);
-		});
+		this._height = PLAYER_HEIGHT;
+		this._width = PLAYER_WIDTH;
 	}
 
 	playerAction (event)
@@ -46,12 +43,6 @@ class Player {
 		//projectiles[projectile];
 	}
 
-	getX() {
-		return this._position_x;
-	}
-	getY() {
-		return this._position_x;
-	}
 }
 
 export { Player };
