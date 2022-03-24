@@ -12,12 +12,24 @@ window.addEventListener('DOMContentLoaded', () => {
 	// initialize player
 	player = new Player(world._ground_coord_x, world._ground_coord_y);
 
-	drawWorld();
-	drawPlayer();
-
+	//player.playerAction({ 'keycode': 3 } );
+	window.addEventListener( 'keydown', player.playerAction.bind(player) );
 	//request animation frame
+	window.requestAnimationFrame( main );
  }
 );
+
+function main() {
+	clearWorld();
+	drawWorld();
+	drawPlayer();
+	window.requestAnimationFrame( main );
+}
+
+function clearWorld() {
+	world._context.clearRect(0,0,world._world.width,world._world.height);
+}
+
 
 function drawWorld () {
 	// draw ground

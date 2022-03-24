@@ -10,16 +10,9 @@ class Player {
 		this._position_y = y;
 		this._height = PLAYER_HEIGHT;
 		this._width = PLAYER_WIDTH;
+
 	}
 
-	playerAction (event)
-	{
-		// f to shoot
-		if ( event.KeyCode == 70 )
-			shoot();
-		else
-			movePlayer();
-	}
 	// on keydown
 	movePlayer (event) {
 		switch ( event.KeyCode ) {
@@ -37,10 +30,44 @@ class Player {
 		}
 	}
 
+
 	shoot () {
 		//projectile = new Projectile();
 			// TODO: Projectile will iterate through projectiles and update them
 		//projectiles[projectile];
+	}
+
+	playerAction (event)
+	{
+		// f to shoot
+		console.log(event);
+		if ( event.keyCode == 70 )
+		{
+			this.shoot();
+		}
+		else
+		{
+			// TODO: model gravity
+			switch ( event.keyCode ) {
+				//up
+				case 38:
+					this._position_y -= 5;
+					break;
+				//down
+				case 40:
+					this._position_y += 5;
+					break;
+
+				//right
+				case 39:
+					this._position_x += 8;
+					break;
+				//left
+				case 37:
+					this._position_x -= 8;
+					break;
+			}
+		}
 	}
 
 }
