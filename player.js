@@ -72,6 +72,7 @@ class Player {
 				//right
 				case 39:
 					this._position_x += this._vx;
+					//this._running = 1;
 					break;
 				//left
 				case 37:
@@ -96,10 +97,11 @@ class Player {
 			//else player is falling down
 			case 0:
 				this._vy *= 1.10;
+				//check if were about to fall through the ground
 				if( ( this._position_y + this._vy ) > ground_height )
-					this._position_y = ground_height;
+					this._position_y = ground_height; // if so, set position to the ground
 				else
-					this._position_y += this._vy;
+					this._position_y += this._vy; // if not, keep going
 				break;
 		}
 	}

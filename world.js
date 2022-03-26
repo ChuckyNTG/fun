@@ -21,12 +21,16 @@ class World {
 		this._ground_coord_x = WORLD_GROUND_COORD_X;
 		this._ground_coord_y = WORLD_GROUND_COORD_Y;
 
+		this._obstacles = Array();
 		this._context = this._world.getContext("2d");
 	}
 	
-	// for i in array, draw rectangles centered at ( x, y )
-	// must sit above the ground
-	addObstacles () {
+	//add 'n' obstacles
+	addObstacles (n) {
+		// for i in array, draw rectangles centered at ( x, y )
+		while ( n-- )
+			this._obstacles.push(new Obstacle((n * 300 )/2,WORLD_HEIGHT-100,50,20));
+
 
 	}
 
@@ -34,6 +38,15 @@ class World {
 	// if bound of box are touched by player, then player doesn't move
 	// map of all bounds of boxes, whenever player moves, check against the obstacle
 
+}
+
+class Obstacle {
+	constructor(x,y,w,h) {
+		this._x = x;
+		this._y = y;
+		this._width = w;
+		this._height = h;
+	}
 }
 
 export { World }
