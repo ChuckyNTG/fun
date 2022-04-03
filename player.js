@@ -30,23 +30,23 @@ class Player {
 				if ( ! this._jumping )
 				{
 					//jump
-					this._position.y -= this._vxy.vy;
+					this._next_position.y -= this._vxy.vy;
 					this._jumping = 1;
 				}
 				break;
 			//down
 			case 40:
-				this._position.y += this._vxy.vy;
+				this._next_position.y += this._vxy.vy;
 				break;
 
 			//right
 			case 39:
-				this._position.x += this._vxy.vx;
+				this._next_position.x += this._vxy.vx;
 				//this._running = 1;
 				break;
 			//left
 			case 37:
-				this._position.x -= this._vxy.vx;
+				this._next_position.x -= this._vxy.vx;
 					break;
 		}
 	}
