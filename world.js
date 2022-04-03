@@ -85,7 +85,7 @@ class World {
 		{
 			if ( ( obstacle._y <= player._position_y ) && ( player._position_y <= ( obstacle._y + obstacle._height ) ) )
 			{
-				console.log("collision!");
+				console.log("collision at ( origin, origin )!");
 			}
 		}
 
@@ -94,7 +94,25 @@ class World {
 		{
 			if ( ( obstacle._y <= ( player._position_y + player._height ) ) && ( ( player._position_y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
 			{
-				console.log("collision!");
+				console.log("collision at ( origin, h )!");
+			}
+		}
+
+		//check player ( w, origin )
+		if ( ( obstacle._x <= ( player._position_x + player._width ) ) && ( ( player._position_x + player._width ) <= ( obstacle._x + obstacle._width ) ) )
+		{
+			if ( ( obstacle._y <= player._position_y ) && ( player._position_y <= ( obstacle._y + obstacle._height ) ) )
+			{
+				console.log("collision at ( w, origin )!");
+			}
+
+		}
+		//check player ( w, h )
+		if ( ( obstacle._x <= ( player._position_x + player._width ) ) && ( ( player._position_x + player._width ) <= ( obstacle._x + obstacle._width ) ) )
+		{
+			if ( ( obstacle._y <= ( player._position_y + player._height ) ) && ( ( player._position_y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
+			{
+				console.log("collision at ( w, h )!");
 			}
 		}
 
