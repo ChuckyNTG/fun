@@ -9,9 +9,12 @@ const PLAYER_WIDTH = 10;
 class Player {
 	constructor (x,y) {
 		this._position_x = x;
-		this._position_y = y;
-		this._vy = VY;
+		this._position_y = y - PLAYER_HEIGHT;
+		this._next_pos = { 'x': x, 'y': y };
+		//change in x direction
 		this._vx = VX;
+		//change in y direction
+		this._vy = VY;
 		this._jumping = 0;
 		this._height = PLAYER_HEIGHT;
 		this._width = PLAYER_WIDTH;
@@ -82,29 +85,6 @@ class Player {
 		}
 	}
 
-	//doesn't need to be checked everytime
-	gravity ( ground_height )
-	{
-		// if player is jumping up
-		switch ( this._jumping )
-		{
-			case 1:
-				this._vy *= .90;
-				this._position_y -= this._vy;
-				if ( this._vy < 0.10 )
-					this._jumping = 0;
-				break;
-			//else player is falling down
-			case 0:
-				this._vy *= 1.10;
-				//check if were about to fall through the ground
-				if( ( this._position_y + this._vy ) > ground_height )
-					this._position_y = ground_height; // if so, set position to the ground
-				else
-					this._position_y += this._vy; // if not, keep going
-				break;
-		}
-	}
 
 }
 

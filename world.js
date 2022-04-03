@@ -34,9 +34,71 @@ class World {
 
 	}
 
-	// check collision
+	movePlayer( player )
+	{
+		//doesn't need to be checked everytime, can fix
+		if ( ( player._position_y + player._height ) < this._ground_coord_y )
+		{
+			this.gravity( player );
+		}
+
+		this._obstacles.forEach( ( obstacle ) => {
+			this.collisions( obstacle, player );
+		});
+
+	}
+
+	gravity ( player )
+	{
+		// if player is jumping up
+		switch ( player._jumping )
+		{
+			case 1:
+				player._vy *= .90;
+				player._position_y -= player._vy;
+				//check collisions
+				if ( player._vy < 0.10 )
+					player._jumping = 0;
+				break;
+			//else player is falling down
+			case 0:
+				player._vy *= 1.10;
+				//check if were about to fall through the ground
+				if( ( player._position_y + player._height + player._vy ) > this._ground_coord_y )
+					player._position_y = this._ground_coord_y - player._height; // if so, set position to the ground
+				else
+					player._position_y += player._vy; // if not, keep going
+				break;
+		}
+	}
+	// rudimentary collision check
+	// should mix with gravity
+	// gravity sets potential next move, which is then checked against collisions
+	// if player is moving up, check upper coordinates
+	// if player is moving down, check lower bound of player
 	// if bound of box are touched by player, then player doesn't move
 	// map of all bounds of boxes, whenever player moves, check against the obstacle
+	collisions ( obstacle, player )
+	{
+		//check player ( origin, origin )
+		if ( ( obstacle._x <= player._position_x ) && ( player._position_x <= ( obstacle._x + obstacle._width ) ) )
+		{
+			if ( ( obstacle._y <= player._position_y ) && ( player._position_y <= ( obstacle._y + obstacle._height ) ) )
+			{
+				console.log("collision!");
+			}
+		}
+
+		//check player ( origin, h )
+		if ( ( obstacle._x <= player._position_x ) && ( player._position_x <= ( obstacle._x + obstacle._width ) ) )
+		{
+			if ( ( obstacle._y <= ( player._position_y + player._height ) ) && ( ( player._position_y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
+			{
+				console.log("collision!");
+			}
+		}
+
+	}
 
 }
 

@@ -12,6 +12,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	// initialize player
 	player = new Player(world._ground_coord_x, world._ground_coord_y);
+	console.log('ground: ' + world._ground_coord_y );
+	console.log('player_y: ' + player._position_y );
 
 	//player.playerAction({ 'keycode': 3 } );
 	//keydown and keyup
@@ -47,9 +49,6 @@ function drawPlayer () {
 	//draw player on ground
 	world._context.fillStyle = 'rgba(100, 0, 200, 0.5)';
 	// if player is up in the air, then gravity takes effect
-	if ( player._position_y < world._ground_coord_y )
-	{
-		player.gravity( world._ground_coord_y );
-	}
-	world._context.fillRect(player._position_x, player._position_y - player._height, player._width, player._height);
+	world.movePlayer( player );
+	world._context.fillRect(player._position_x, player._position_y, player._width, player._height);
 }
