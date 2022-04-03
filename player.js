@@ -21,30 +21,6 @@ class Player {
 
 	}
 
-	// on keydown
-	movePlayer (event) {
-		switch ( event.KeyCode ) {
-			case 38:
-			case 39:
-				this._position_x += 2;
-				break;
-			case 37:
-			case 40:
-				this._position_x -= 2;
-				break;
-			// TODO: model gravity
-			case 32:
-				this._position_y += 5;
-		}
-	}
-
-
-	shoot () {
-		//projectile = new Projectile();
-			// TODO: Projectile will iterate through projectiles and update them
-		//projectiles[projectile];
-	}
-
 	playerAction (event)
 	{
 		// f to shoot

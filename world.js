@@ -34,6 +34,12 @@ class World {
 
 	}
 
+	// just a special type of obstacle
+	addGround () {
+		this._obstacles.push(new Obstacle(this._ground_coord_x, this._ground_coord_y, this._world.width, this._world.width - this._ground_coord_y ));
+	}
+
+	//TODO: player movement should be setting next position to current position, if not collision issues
 	movePlayer( player )
 	{
 		//doesn't need to be checked everytime, can fix
@@ -64,6 +70,7 @@ class World {
 			case 0:
 				player._vy *= 1.10;
 				//check if were about to fall through the ground
+				//TODO: eventually, the ground should just be made another object and handled by collision detection
 				if( ( player._position_y + player._height + player._vy ) > this._ground_coord_y )
 					player._position_y = this._ground_coord_y - player._height; // if so, set position to the ground
 				else
@@ -81,6 +88,7 @@ class World {
 	collisions ( obstacle, player )
 	{
 		//check player ( origin, origin )
+		//should check next position and then take action
 		if ( ( obstacle._x <= player._position_x ) && ( player._position_x <= ( obstacle._x + obstacle._width ) ) )
 		{
 			if ( ( obstacle._y <= player._position_y ) && ( player._position_y <= ( obstacle._y + obstacle._height ) ) )

@@ -9,14 +9,14 @@ window.addEventListener('DOMContentLoaded', () => {
 	// initialize world objects
 	world = new World();
 	world.addObstacles(2);
+	world.addGround();
 
 	// initialize player
 	player = new Player(world._ground_coord_x, world._ground_coord_y);
-	console.log('ground: ' + world._ground_coord_y );
-	console.log('player_y: ' + player._position_y );
 
 	//player.playerAction({ 'keycode': 3 } );
 	//keydown and keyup
+	//TODO: change function to just change the possible next position
 	window.addEventListener( 'keydown', player.playerAction.bind(player) );
 	//request animation frame
 	window.requestAnimationFrame( main );
@@ -38,7 +38,6 @@ function clearWorld() {
 function drawWorld () {
 	// draw ground
 	world._context.fillStyle = 'rgba(0, 0, 200, 0.5)';
-	world._context.fillRect(world._ground_coord_x, world._ground_coord_y, world._world.width, world._world.width - world._ground_coord_y );
 	// draw obstacles
 	world._obstacles.forEach((obstacle) => {
 		world._context.fillRect(obstacle._x,obstacle._y,obstacle._width,obstacle._height);
