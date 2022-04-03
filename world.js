@@ -43,7 +43,7 @@ class World {
 	movePlayer( player )
 	{
 		//doesn't need to be checked everytime, can fix
-		if ( ( player._position_y + player._height ) < this._ground_coord_y )
+		if ( ( player._position.y + player._height ) < this._ground_coord_y )
 		{
 			this.gravity( player );
 		}
@@ -60,21 +60,21 @@ class World {
 		switch ( player._jumping )
 		{
 			case 1:
-				player._vy *= .90;
-				player._position_y -= player._vy;
+				player._vxy.vy *= .90;
+				player._position.y -= player._vxy.vy;
 				//check collisions
-				if ( player._vy < 0.10 )
+				if ( player._vxy.vy < 0.10 )
 					player._jumping = 0;
 				break;
 			//else player is falling down
 			case 0:
-				player._vy *= 1.10;
+				player._vxy.vy *= 1.10;
 				//check if were about to fall through the ground
 				//TODO: eventually, the ground should just be made another object and handled by collision detection
-				if( ( player._position_y + player._height + player._vy ) > this._ground_coord_y )
-					player._position_y = this._ground_coord_y - player._height; // if so, set position to the ground
+				if( ( player._position.y + player._height + player._vxy.vy ) > this._ground_coord_y )
+					player._position.y = this._ground_coord_y - player._height; // if so, set position to the ground
 				else
-					player._position_y += player._vy; // if not, keep going
+					player._position.y += player._vxy.vy; // if not, keep going
 				break;
 		}
 	}
@@ -89,36 +89,36 @@ class World {
 	{
 		//check player ( origin, origin )
 		//should check next position and then take action
-		if ( ( obstacle._x <= player._position_x ) && ( player._position_x <= ( obstacle._x + obstacle._width ) ) )
+		if ( ( obstacle._x <= player._position.x ) && ( player._position.x <= ( obstacle._x + obstacle._width ) ) )
 		{
-			if ( ( obstacle._y <= player._position_y ) && ( player._position_y <= ( obstacle._y + obstacle._height ) ) )
+			if ( ( obstacle._y <= player._position.y ) && ( player._position.y <= ( obstacle._y + obstacle._height ) ) )
 			{
 				console.log("collision at ( origin, origin )!");
 			}
 		}
 
 		//check player ( origin, h )
-		if ( ( obstacle._x <= player._position_x ) && ( player._position_x <= ( obstacle._x + obstacle._width ) ) )
+		if ( ( obstacle._x <= player._position.x ) && ( player._position.x <= ( obstacle._x + obstacle._width ) ) )
 		{
-			if ( ( obstacle._y <= ( player._position_y + player._height ) ) && ( ( player._position_y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
+			if ( ( obstacle._y <= ( player._position.y + player._height ) ) && ( ( player._position.y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
 			{
 				console.log("collision at ( origin, h )!");
 			}
 		}
 
 		//check player ( w, origin )
-		if ( ( obstacle._x <= ( player._position_x + player._width ) ) && ( ( player._position_x + player._width ) <= ( obstacle._x + obstacle._width ) ) )
+		if ( ( obstacle._x <= ( player._position.x + player._width ) ) && ( ( player._position.x + player._width ) <= ( obstacle._x + obstacle._width ) ) )
 		{
-			if ( ( obstacle._y <= player._position_y ) && ( player._position_y <= ( obstacle._y + obstacle._height ) ) )
+			if ( ( obstacle._y <= player._position.y ) && ( player._position.y <= ( obstacle._y + obstacle._height ) ) )
 			{
 				console.log("collision at ( w, origin )!");
 			}
 
 		}
 		//check player ( w, h )
-		if ( ( obstacle._x <= ( player._position_x + player._width ) ) && ( ( player._position_x + player._width ) <= ( obstacle._x + obstacle._width ) ) )
+		if ( ( obstacle._x <= ( player._position.x + player._width ) ) && ( ( player._position.x + player._width ) <= ( obstacle._x + obstacle._width ) ) )
 		{
-			if ( ( obstacle._y <= ( player._position_y + player._height ) ) && ( ( player._position_y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
+			if ( ( obstacle._y <= ( player._position.y + player._height ) ) && ( ( player._position.y + player._height ) <= ( obstacle._y + obstacle._height ) ) )
 			{
 				console.log("collision at ( w, h )!");
 			}

@@ -49,5 +49,5 @@ function drawPlayer () {
 	world._context.fillStyle = 'rgba(100, 0, 200, 0.5)';
 	// if player is up in the air, then gravity takes effect
 	world.movePlayer( player );
-	world._context.fillRect(player._position_x, player._position_y, player._width, player._height);
+	world._context.fillRect(player._position.x, player._position.y, player._width, player._height);
 }
